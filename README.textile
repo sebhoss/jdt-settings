@@ -17,7 +17,7 @@ bc.. <build>
           </goals>
           <configuration>
             <resourceBundles>
-              <resourceBundle>com.github.sebhoss:jdt-compiler-settings:1.0.0-SNAPSHOT</resourceBundle>
+              <resourceBundle>com.github.sebhoss:jdt-compiler-settings:1.0.0</resourceBundle>
             </resourceBundles>
             <outputDirectory>${basedir}/.settings</outputDirectory>
           </configuration>
