@@ -23,19 +23,19 @@
   <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--                               INFORMATIONS                              -->
   <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-  <artifactId>jdt-compiler-settings</artifactId>
+  <artifactId>jdt-settings</artifactId>
   <version>1.0.1-SNAPSHOT</version>
   <inceptionYear>2013</inceptionYear>
-  <url>https://github.com/sebhoss/jdt-compiler-settings</url>
-  <name>JDT Compiler Settings</name>
-  <description>Shared compiler settings for Java projects using the Eclipse JDT compiler.</description>
+  <url>https://github.com/sebhoss/jdt-settings</url>
+  <name>JDT Settings</name>
+  <description>Shared settings for Java projects using Eclipse JDT.</description>
 
   <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--                                  SOURCE                                 -->
   <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <scm>
-    <connection>scm:git:git://github.com/sebhoss/jdt-compiler-settings.git</connection>
-    <developerConnection>scm:git:git@github.com:sebhoss/jdt-compiler-settings.git</developerConnection>
+    <connection>scm:git:git://github.com/sebhoss/jdt-settings.git</connection>
+    <developerConnection>scm:git:git@github.com:sebhoss/jdt-settings.git</developerConnection>
     <tag>master</tag>
     <url>${project.url}</url>
   </scm>
@@ -58,7 +58,7 @@
         </executions>
         <configuration>
          <includes>
-           <include>**/org.eclipse.jdt.core.prefs</include>
+           <include>**/*.prefs</include>
          </includes>
         </configuration>
       </plugin>
