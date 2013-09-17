@@ -1,4 +1,4 @@
-h1. JDT Settings "!https://secure.travis-ci.org/sebhoss/jdt-compiler-settings.png!":http://travis-ci.org/sebhoss/jdt-compiler-settings
+h1. JDT Settings "!https://secure.travis-ci.org/sebhoss/jdt-settings.png!":http://travis-ci.org/sebhoss/jdt-settings
 
 p. Resource bundle which contains settings for the Eclipse JDT compiler. Unpack it with the "remote resources plugin":http://maven.apache.org/plugins/maven-remote-resources-plugin/ and use the unpacked resource together with the "Maven compiler plugin":http://maven.apache.org/plugins/maven-compiler-plugin/.
 
