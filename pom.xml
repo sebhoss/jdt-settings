@@ -23,7 +23,7 @@
   <!--                               INFORMATIONS                              -->
   <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <artifactId>jdt-settings</artifactId>
-  <version>1.0.1</version>
+  <version>1.0.2-SNAPSHOT</version>
   <inceptionYear>2013</inceptionYear>
   <url>https://github.com/sebhoss/jdt-settings</url>
   <name>JDT Settings</name>
