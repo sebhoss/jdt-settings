@@ -16,6 +16,8 @@ bc.. <build>
             <goal>process</goal>
           </goals>
           <configuration>
+            <attachToMain>false</attachToMain>
+            <attachToTest>false</attachToTest>
             <resourceBundles>
               <resourceBundle>com.github.sebhoss:jdt-settings:${version.jdt-settings}</resourceBundle>
             </resourceBundles>
