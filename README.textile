@@ -11,7 +11,7 @@ bc.. <build>
       <version>${version.resources-plugin}</version>
       <executions>
         <execution>
-          <id>jdt-compiler-settings</id>
+          <id>jdt-settings</id>
           <goals>
             <goal>process</goal>
           </goals>
