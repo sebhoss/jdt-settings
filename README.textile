@@ -1,6 +1,607 @@
 h1. JDT Settings "!https://secure.travis-ci.org/sebhoss/jdt-settings.png!":http://travis-ci.org/sebhoss/jdt-settings
 
-p. Resource bundle which contains settings for the Eclipse JDT compiler. Unpack it with the "remote resources plugin":http://maven.apache.org/plugins/maven-remote-resources-plugin/ and use the unpacked resource together with the "Maven compiler plugin":http://maven.apache.org/plugins/maven-compiler-plugin/.
+p. Resource bundle which contains settings for Eclipse JDT. Use this bundle (or a fork of it) to set specific settings for a single project without changing workspace settings. Take a look at the "usage":#usage guide to see how this bundle can be used to automatically set up a project in Eclipse.
+
+h2. Settings
+
+Currently the following settings will be set:
+
+h3(#compiler). Compiler
+
+h4. General
+
+h5. JDK Compliance
+
+|_. Setting |_. Value |
+| Compiler compliance level | 1.8 |
+
+h5. Classfile Generation
+
+|_. Setting |_. Value |
+| Add variable attributes to generated class files (used by the debugger) | true |
+| Add line number attributes to generated class files (used by the debugger) | true |
+| Add source file name to generated class file (used by the debugger) | true |
+| Preserve unused (never read) local variables | true |
+| Store information about method parameters (useable via reflection) | true |
+
+h4. Building
+
+h5. General
+
+|_. Setting |_. Value |
+| Maximum number of problems reported per compilation unit | 100 |
+| Enable use of exclusion patterns in source folders | true |
+| Enable use of multiple output locations for source folders | true |
+
+h5. Build path problems
+
+|_. Setting |_. Value |
+| About build when build path errors occur | true |
+| Incomplete build path | Error |
+| Circular dependencies | Error |
+| Incompatible required binaries | Error |
+| Output location overlaps source location | Error |
+| No strictly compatible JRE for execution environment available | Error |
+
+h5. Output folder
+
+|_. Setting |_. Value |
+| Duplicated resources | Error |
+| Scrub output folders when cleaning projects | true |
+| Rebuild class files modified by others | *false* |
+| Filtered resources | |
+
+h4. Errors/Warnings
+
+h5. Code style
+
+|_. Setting |_. Value |
+| Non-static access to static member | Error |
+| Indirect access to static member | Error |
+| Unqualified access to instance field | *Ignore* |
+| Access to a non-accessible member of an enclosing type | Error |
+| Parameter assignment | Error |
+| Non-externalized strings (missing/unused $NON-NLS$ tag) | Error |
+| Undocumented empty block | Error |
+| Resource not managed via try-with-resource (1.7 or higher) | Error |
+| Method with a constructor name | Error |
+| Method can be static | Error |
+| Method can potentially be static | Error |
+
+h5. Potential programming problems
+
+|_. Setting |_. Value |
+| Comparing identical values ('x == x') | Error |
+| Assignment has no effect (e.g. 'x = x') | Error |
+| Possible accidental boolean assignment (e.g. 'if (a = b)') | Error |
+| Boxing and unboxing conversions | Error |
+| Using a char array in string concatenation | Error |
+| Inexact type match for vararg arguments | Error |
+| Empty statement | Error |
+| Unused object allocation | Error |
+| Incomplete 'switch' cases on enum | Error |
+| Signal even if 'default' case exists | *false* |
+| 'switch' is missing 'default' case | Error |
+| 'switch' case fall-through | Error |
+| Hidden catch block | Error |
+| 'finally' does not complete normally | Error |
+| Dead code (e.g. 'if (false)') | Error |
+| Resource leak | Error |
+| Potential resource leak | Error |
+| Serializable class without serialVersionUID | Error |
+| Missing synchronized modifier on inherited method | Error |
+| Class overrides 'equals()' but not 'hashCode()' | Error |
+
+h5. Name shadowing and conflicts
+
+|_. Setting |_. Value |
+| Field declaration hides another field or variable | Error |
+| Local variable declaration hides another field or variable | Error |
+| Include constructor or setter method parameters | *false* |
+| Type parameter hides another type | Error |
+| Method does not override package visible method | Error |
+| Interface method conflicts with protected 'Object' method | Error |
+
+h5. Deprecated and restricted API
+
+|_. Setting |_. Value |
+| Deprecated API | Error |
+| Signal use of deprecated API inside deprecated code | true |
+| Signal overriding or implementing deprecated method | true |
+| Forbidden reference (access rules) | Error |
+| Discouraged reference (access rules) | Error |
+
+h5. Unnecessary code
+
+|_. Setting |_. Value |
+| Value of local variable is not used | Error |
+| Value of parameter is not used | Error |
+| Ignore in overriding and implementing methods | true |
+| Unused type parameter | Error |
+| Ignore unused parameters documented with '@param' tag | true |
+| Unused import | Error |
+| Unused private member | Error |
+| Unnecessary 'else' statement | Error |
+| Unnecessary cast of 'instanceof' operation | Error |
+| Unnecessary declaration of thrown exception | Error |
+| Ignore in overriding and implementing methods | true |
+| Ignore exceptions documented with '@throws' or '@exception' tags | true |
+| Ignore 'Exception' and 'Throwable' | true |
+| Unused 'break' or 'continue' label | Error |
+| Redundant super interface | Error |
+
+h5. Generic types
+
+|_. Setting |_. Value |
+| Unchecked generic type operation | Error |
+| Usage of raw type | Error |
+| Generic type parameter declared with a final type bound | Error |
+| Redundant type arguments (1.7 or higher) | Error |
+| Ignore unavoidable generic type problems due to raw APIs | *false* |
+
+h5. Annotations
+
+|_. Setting |_. Value |
+| Missing '@Override' annotation | Error |
+| Include implementations of interface methods (1.6 or higher) | true |
+| Missing '@Deprecated' annotation | Error |
+| Annotation is used as super interface | Error |
+| Unhandled token in '@SuppressWarnings' | Error |
+| Enable '@SuppressWarnings' annotation | true |
+| Unused '@SuppressWarnings' token | Error |
+| Suppress optional errors with '@SuppressWarnings' | true |
+
+h5. Null analysis
+
+|_. Setting |_. Value |
+| Null pointer access | Error |
+| Potential null pointer access | Error |
+| Redundant null check | Error |
+| Include 'assert' in null analysis | true |
+| Enable annotation-based null-analysis | true |
+| Violation of null specification | Error |
+| Conflict between null annotations and null inference | Error |
+| Unchecked conversion from non-annotated type to @NonNull type | Error |
+| Redundant null annotation | Error |
+| '@NonNull' parameter not annotated in overriding method | Error |
+| Missing '@NonNullByDefault' annotation on package | *Warning* |
+| Use default annotations for null specifications | true |
+| 'Nullable' annotation | org.eclipse.jdt.annotation.Nullable |
+| 'NonNull' annotation | org.eclipse.jdt.annotation.NonNull |
+| 'NonNullByDefault' annotation | org.eclipse.jdt.annotation.NonNullByDefault |
+| Inherit null annotations | true |
+| Enable syntactic null analysis for fields | true |
+
+h4. Javadoc
+
+|_. Setting |_. Value |
+| Process Javadoc comments | true |
+| Malformed Javadoc comments | Error |
+| Only consider members as visible as | Public |
+| Validate tag arguments (@param, @throws, @exception, @see, @link) | true |
+| Report non visible references | true |
+| Report deprecated references | true |
+| Missing tag descriptions | Validate all standard tags |
+| Missing Javadoc tags | Error |
+| Only consider members as visible as | Public |
+| Ignore in overriding and implementing methods | true |
+| Ignore method type parameters | true |
+| Missing Javadoc comments | Error |
+| Only consider members as visible as | Public |
+| Ignore in overriding and implementing methods | true |
+
+h3. Resource
+
+|_. Setting |_. Value |
+| Text file encoding | Other (UTF-8) |
+| New text file line delimiter | Inherited from container (Unix) |
+
+h3. Code Style
+
+h4. General
+
+|_. Setting |_. Value |
+| Prefix convention for names | |
+| Suffix convention for names | |
+| Qualify all generated field access with 'this.' | *false* |
+| Use 'is' prefix for getters that return boolean | true |
+| Add '@Override' annotation for new overriding methods | true |
+| Exception variable name in catch blocks | exception |
+
+h4. Clean Up
+
+h5. Code Organizing
+
+h6. Formatter
+
+|_. Setting |_. Value |
+| Format source code | true |
+| Remove trailing whitespace | true |
+| All lines | true |
+| Correct indentation | true |
+
+h6. Imports
+
+|_. Setting |_. Value |
+| Organize imports | true |
+
+h6. Members
+
+|_. Setting |_. Value |
+| Sort members | *false* |
+
+h5. Code Style
+
+h6. Control statements
+
+|_. Setting |_. Value |
+| Use blocks in if/while/for/do statements | Always |
+| Convert 'for' loops to enhanced | true |
+
+h6. Expressions
+
+|_. Setting |_. Value |
+| Use parentheses in expressions | Only if necessary |
+
+h6. Variable declarations
+
+|_. Setting |_. Value |
+| Use modifier 'final' where possible | true |
+| Private fields | true |
+| Parameter | true |
+| Local variables | true |
+
+h6. Functional interface instances
+
+|_. Setting |_. Value |
+| Convert functional interface instances | true |
+| Use lambda where possible | true |
+
+h5. Member Accesses
+
+h6. Non static accesses
+
+|_. Setting |_. Value |
+| Use 'this' qualifier for field accesses | Only if necessary |
+| Use 'this' qualifier for method accesses | Only if necessary |
+
+h6. Static accesses
+
+|_. Setting |_. Value |
+| Use declaring class as qualifier | true |
+| Qualify field accesses | *false* |
+| Qualify method accesses | *false* |
+| Change all accesses through subtypes | true |
+| Change all accesses through instances | true |
+
+h5. Missing Code
+
+h6. Annotations
+
+|_. Setting |_. Value |
+| Add missing Annotations | true |
+| '@Override' | true |
+| Implementations of interface methods (1.6 or higher) | true |
+| '@Deprecated' | true |
+
+h6. Potential programming problems
+
+|_. Setting |_. Value |
+| Add serial version ID | Generated |
+
+h6. Unimplemented code
+
+|_. Setting |_. Value |
+| Add unimplemented methods | true |
+
+h5. Unnecessary Code
+
+h6. Unused code
+
+|_. Setting |_. Value |
+| Remove unused imports | true |
+| Remove unused private members | true |
+| Types | true |
+| Constructors | true |
+| Fields | true |
+| Methods | true |
+| Remove unused local variables | true |
+
+h6. Unnecessary code
+
+|_. Setting |_. Value |
+| Remove unnecessary casts | true |
+| Remove unnecessary '$NON-NLS$' tags | true |
+
+h4. Formatter
+
+h5. Indentation
+
+h6. General settings
+
+|_. Setting |_. Value |
+| Tab policy | Spaces only |
+| Indentation size | 4 |
+| Tab size | 4 |
+
+h6. Alignment of fields in class declarations
+
+|_. Setting |_. Value |
+| Align fields in columns | true |
+
+h6. Indent
+
+|_. Setting |_. Value |
+| Declarations with class body | true |
+| Declarations within enum declaration | true |
+| Declarations within enum constants | true |
+| Declaration within annotation declaration | true |
+| Statements within method/constructor body | true |
+| Statements within blocks | true |
+| Statements within 'switch' body | true |
+| Statements within 'case' body | true |
+| 'break' statements | true |
+| Empty lines | *false* |
+
+h5. Braces
+
+h6. Brace positions
+
+|_. Setting |_. Value |
+| Class or interface declaration | Same line |
+| Anonymous class declaration | Same line |
+| Constructor declaration | Same line |
+| Method declaration | Same line |
+| Enum declaration | Same line |
+| Enum constant body | Same line |
+| Annotation type declaration | Same line |
+| Blocks | Same line |
+| Blocks in case statement | Same line |
+| 'switch' statement | Same line |
+| Array initializer | Same line |
+| Lambda body | Same line |
+
+h5. Blank Lines
+
+h6. Blank lines in compilation unit
+
+|_. Setting |_. Value |
+| Before package declaration | 0 |
+| After package declaration | 1 |
+| Before import declaration | 1 |
+| Between import groups | 1 |
+| After import declaration | 1 |
+| Between class declarations | 1 |
+
+h6. Blank lines within class declarations
+
+|_. Setting |_. Value |
+| Before first declaration | 1 |
+| Before declarations of the same kind | 1 |
+| Before member class declarations | 1 |
+| Before field declarations | 0 |
+| Before method declarations | 1 |
+| At beginning of method body | 0 |
+
+h6. Existing blank lines
+
+|_. Setting |_. Value |
+| Number of empty lines to preserve | 1 |
+
+h5. New Lines
+
+h6. Insert new line
+
+|_. Setting |_. Value |
+| in empty class body | true |
+| in empty anonymous class body | true |
+| in empty method body | true |
+| in empty block | true |
+| after labels | true |
+| in empty enum declaration | true |
+| in empty enum constant body | true |
+| in empty annotation body | true |
+| at end of file | true |
+
+h6. Array initializers
+
+|_. Setting |_. Value |
+| Insert new line after opening brace of array initializer | *false* |
+| Insert new line before closing brace of array initializer | *false* |
+
+h6. Empty statements
+
+|_. Setting |_. Value |
+| Put empty statements on new line | true |
+
+h6. Annotations
+
+|_. Setting |_. Value |
+| Insert new line after annotations on packages | true |
+| Insert new line after annotations on types | true |
+| Insert new line after annotations on fields | true |
+| Insert new line after annotations on methods | true |
+| Insert new line after annotations on local variables | true |
+| Insert new line after annotations on parameters | *false* |
+| Insert new line after type annotations | *false* |
+
+h5. Control Statements
+
+h6. General
+
+|_. Setting |_. Value |
+| Insert new line before 'else' in an 'if' statement | *false* |
+| Insert new line before 'catch' in a 'try' statement | *false* |
+| Insert new line before 'finally' in a 'try' statement | *false* |
+| Insert new line before 'while' in a 'do' statement | *false* |
+
+h6. 'if else'
+
+|_. Setting |_. Value |
+| Keep 'then' statement on same line | *false* |
+| Keep simple 'if' on one line | *false* |
+| Keep 'else' statement on same line | *false* |
+| Keep 'else if' on one line | true |
+| Keep 'return' or 'throw' clause on one line | *false* |
+
+h5. Line Wrapping
+
+h6. General settings
+
+|_. Setting |_. Value |
+| Maximum line width | 120 |
+| Default indentation for wrapped lines | 2 |
+| Default indentation for array initializers | 2 |
+| Never join already wrapped lines | true |
+| Prefer wrapping outer expressions (keep nested expression on on line) | true |
+
+h5. Comments
+
+h6. General settings
+
+|_. Setting |_. Value |
+| Enable Javadoc comment formatting | true |
+| Enable block comment formatting | true |
+| Enable line comment formatting | true |
+| Format line comments on first column | true |
+| Enable header comment formatting | *false* |
+| Preserve white space between code and line comments | *false* |
+| Never indent line comments on first column | *false* |
+| Never indent block comments on first column | *false* |
+| Never join lines | *false* |
+
+h6. Javadoc comment settings
+
+|_. Setting |_. Value |
+| Format HTML tags | true |
+| Format Java code snippets inside 'pre' tags | true |
+| Blank line before Javadoc tags | true |
+| Indent Javadoc tags | true |
+| Indent description after @param | true |
+| New line after @param tags | true |
+| /** and */ on separate lines | true |
+| Remove blank lines | true |
+
+h6. Block comment settings
+
+|_. Setting |_. Value |
+| /* and */ on separate lines | true |
+| Remove blank lines | true |
+
+h6. Line width
+
+|_. Setting |_. Value |
+| Maximum line width for comments | 120 |
+
+h5. Off/On Tags
+
+|_. Setting |_. Value |
+| Enable Off/On tags | true |
+| Off tag | @formatter:off |
+| On tag | @formatter:on |
+
+
+h3. Editor
+
+h4. Save Actions
+
+|_. Setting |_. Value |
+| Perform the selected actions on save | true |
+| Format source code | Format all lines |
+| Organize imports | true |
+| Additional actions | true |
+
+h5. Code Organizing
+
+h6. Formatter
+
+|_. Setting |_. Value |
+| Remove trailing whitespace | All lines |
+| Correct indentation | true |
+
+h6. Members
+
+|_. Setting |_. Value |
+| Sort members | *false* |
+
+h5. Code Style
+
+h6. Control statements
+
+|_. Setting |_. Value |
+| Use blocks in if/while/for/do statements | Always |
+| Convert 'for' loops to enhanced | true |
+
+h6. Expressions
+
+|_. Setting |_. Value |
+| Use parentheses in expressions | Only if necessary |
+
+h6. Variable declarations
+
+|_. Setting |_. Value |
+| Use modifier 'final' where possible | true |
+| Private fields | true |
+| Parameter | true |
+| Local variables | true |
+
+h6. Functional interface instances
+
+|_. Setting |_. Value |
+| Convert functional interface instances | Use lambda where possible |
+
+h5. Member Accesses
+
+h6. Non static accesses
+
+|_. Setting |_. Value |
+| Use 'this' qualifier for field accesses | Only if necessary |
+| Use 'this' qualifier for method accesses | Only if necessary |
+
+h6. Static accesses
+
+|_. Setting |_. Value |
+| Use declaring class as qualifier | true |
+| Qualify field accesses | *false* |
+| Qualify method accesses | *false* |
+| Change all accesses through subtypes | true |
+| Change all accesses through instances | true |
+
+h5. Missing Code
+
+h6. Annotations
+
+|_. Setting |_. Value |
+| Add missing Annotations | true |
+| '@Override' | true |
+| Implementations of interface methods (1.6 or higher) | true |
+| '@Deprecated' | true |
+
+h5. Unnecessary Code
+
+h6. Unused code
+
+|_. Setting |_. Value |
+| Remove unused imports | true |
+| Remove unused private members | true |
+| Types | true |
+| Constructors | true |
+| Fields | true |
+| Methods | true |
+| Remove unused local variables | true |
+
+h6. Unnecessary code
+
+|_. Setting |_. Value |
+| Remove unnecessary casts | true |
+| Remove unnecessary '$NON-NLS$' tags | true |
+
+
+h2(#usage). Usage
+
+h3. Eclipse settings
+
+p. In order to automatically configure a single project within, use the following Maven configuration:
 
 bc.. <build>
   <plugins>
@@ -26,7 +627,18 @@ bc.. <build>
         </execution>
       </executions>
     </plugin>
+    ...
+  </plugins>
+</build>
 
+
+h3. Maven/CI settings
+
+p. In order to re-use the same "compiler settings":#compiler in both the Eclipse project configuration and the normal build system, add the following configuration on top the previous one:
+
+bc.. <build>
+  <plugins>
+    ...
     <plugin>
       <groupId>org.apache.maven.plugins</groupId>
       <artifactId>maven-compiler-plugin</artifactId>
@@ -50,4 +662,9 @@ bc.. <build>
   </plugins>
 </build>
 
+p. Replace the placeholders with an appropriate version:
 
+* "@${version.jdt-settings}@":http://search.maven.org/#search%7Cga%7C1%7Ca%3A%22jdt-settings%22
+* "@${version.resources-plugin}@":http://search.maven.org/#search%7Cga%7C1%7Ca%3A%22maven-remote-resources-plugin%22
+* "@${version.compiler-plugin}@":http://search.maven.org/#search%7Cga%7C1%7Ca%3A%22maven-compiler-plugin%22
+* "@${version.tycho}@":http://search.maven.org/#search%7Cga%7C1%7Ca%3A%22tycho-compiler-jdt%22%20g%3A%22org.eclipse.tycho%22
