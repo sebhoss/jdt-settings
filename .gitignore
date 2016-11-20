@@ -3,3 +3,4 @@
 .classpath
 .pmd
 target/
+.ansible-git-*
